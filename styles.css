@@ -1,0 +1,275 @@
+.Colour-palette{
+    color: #05634d + #fcfdfe
+    #041010 + #2dc295
+    #00e083 + #073229
+    #2bc198 #062323;
+}
+
+@font-face {
+    font-family: 'coolvetica';
+    src: "/Users/mooster/Desktop/Summer Accelerator/Gaialith/Coolvetica Rg.otf";
+}
+
+body {
+    background-color: #073229;
+    color: #fafafa;
+    font-family: 'coolvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    padding: 120px 40px 40px 40px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title-section {
+    margin-bottom: 40px;
+}
+
+.content-section {
+    font-family: 'coolvetica', sans-serif;
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+.content-section p {
+    margin: 20px 0;
+    color: #fafafa;
+}
+
+.page-title-1 {
+    font-size: 60px;
+    font-weight: bold;
+    color: #fafafa;
+    margin: 0;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+
+.page-title-2 {
+    font-size: 60px;
+    font-weight: bold;
+    color: #4afdcb;
+    margin: 0 0 0 10px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+
+.brand-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #073229;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.nav-toolbar {
+    display: flex;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 20px 40px;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.btn {
+    border: none;
+    color: #073229;
+    padding: 10px 20px;
+    margin: 0 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn:hover{
+    border: none;
+    color: #582305 !important;
+}
+
+.btn:active,
+.btn:focus {
+    outline: none;
+    border: none;
+}
+
+.btn2 {
+    border: none;
+    background-color: #05634d;
+    color: #fcfdfe;
+    padding: 10px 20px;
+    margin: 0 8px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.btn2:hover{
+    border: none;
+    background-color: #078266;
+}
+
+.btn2:active,
+.btn2:focus {
+    outline: none;
+    border: none;
+}
+
+.modal-footer {
+    justify-content: center;
+    border-top: none;
+    padding: 20px;
+}
+
+.modal-footer .btn2 {
+    margin: 0;
+}
+
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 1rem);
+}
+
+.modal-content {
+    background: #073229;
+    border: 1px solid #05634d;
+    border-radius: 12px;
+    color: #fafafa;
+}
+
+.modal-body .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 1;
+}
+
+.modal-body {
+    color: #fafafa;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-title {
+    color: #fafafa !important;
+    font-family: 'coolvetica', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.modal-body .form-control {
+    background: #041010;
+    border: 1px solid #05634d;
+    color: #fafafa;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: 'coolvetica', sans-serif;
+}
+
+.modal-body .form-control::placeholder {
+    color: #2dc295;
+    opacity: 0.7;
+}
+
+.modal-body .form-control:focus {
+    background: #041010;
+    border-color: #2dc295;
+    color: #fafafa;
+    box-shadow: 0 0 0 0.2rem rgba(45, 194, 149, 0.25);
+}
+
+.btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.custom-alert-overlay.show {
+    opacity: 1;
+}
+
+.custom-alert {
+    background: #073229;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid #05634d;
+    transform: scale(0.7);
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-alert-overlay.show .custom-alert {
+    transform: scale(1);
+}
+
+.custom-alert {
+    background: #073229;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid #05634d;
+}
+
+.custom-alert-content p {
+    margin: 0 0 20px 0;
+    font-size: 16px;
+    color: #fafafa;
+    font-family: 'coolvetica', sans-serif;
+}
+
+.custom-alert .btn2 {
+    margin: 0;
+    min-width: 80px;
+    background-color: #05634d;
+    color: #fcfdfe;
+}
+
+.custom-alert .btn2:hover {
+    background-color: #078266;
+    color: #fcfdfe;
+}
+
+.modal-title {
+    color: black;
+}

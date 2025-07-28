@@ -1,0 +1,121 @@
+<!-- FRONT END WEBSITE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Gaialith</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="nav-toolbar">
+        <h2 class="brand-title">Gaialith</h2>
+        <button class="btn contact-us" title="Contact">Contact Us</button>
+    </nav>
+    
+   
+    <div class="main-content">
+        <div>
+            <span class="page-title-1" style="margin-right: -5px">TV</span>
+            <span class="page-title-2" style="margin-left: -5px">PAPERWORK</span>
+        </div>
+        <pre>
+        Short caption to describe TV Paperwork. 
+        
+
+        More information about the product.
+        
+
+        Sign up to our mailing list below to get updates!
+        </pre>
+        <button class="btn2 mailing-list" title="mailing-list">Join Our Mailing List</button>
+    </div>
+
+    <div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h4 class="modal-title" id="newsletterModalLabel" style="text-align: center;">Sign Up For Our Newsletter</h4>
+                <br>
+                <input type="email" class="form-control" id="emailInput" placeholder="Enter your email address" required>
+            </div>
+            <div class="modal-footer">
+              <button class="btn2 sign-up" title="sign-up">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+
+    $('.mailing-list').on('click', function() {
+        $('#emailInput').val(''); // Clear the input field
+        $('#newsletterModal').modal('show');
+    });
+
+    // Handle modal hidden event to manage focus
+    $('#newsletterModal').on('hidden.bs.modal', function () {
+        // Return focus to the mailing list button
+        $('.mailing-list').focus();
+    });
+
+    $('.sign-up').on('click', function() {
+        var email = $('#emailInput').val();
+        if (email) {
+            $('#emailInput').val(''); // Clear the input field
+            // Remove focus from button before hiding modal
+            $(this).blur();
+            $('#newsletterModal').modal('hide');
+            setTimeout(() => {
+                showCustomAlert("You're all set! We'll be in touch soon!");
+            }, 500); //Gives time for sign up modal to close and confirmation alert to open
+        } else {
+            showCustomAlert('Please enter a valid email address');
+        }
+    });
+
+    function showCustomAlert(message) {
+        //Custom alert that fits branding
+        var alertHTML = `
+            <div class="custom-alert-overlay">
+                <div class="custom-alert">
+                    <div class="custom-alert-content">
+                        <p>${message}</p>
+                        <button class="btn2 alert-ok">OK</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        //Add to the page
+        $('body').append(alertHTML);
+        
+        //Trigger modal-style animation after a brief delay
+        setTimeout(() => {
+            $('.custom-alert-overlay').addClass('show');
+        }, 10);
+        
+        //OK button
+        $('.alert-ok').on('click', function() {
+            $('.custom-alert-overlay').remove();
+        });
+        
+        //User can click outside the pop up to close it
+        $('.custom-alert-overlay').on('click', function(e) {
+            if (e.target === this) {
+                $('.custom-alert-overlay').remove();
+            }
+        });
+    }
+
+    $(document).ready(function() {
+
+    });
+</script>
+</body>
+</html>
