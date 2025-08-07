@@ -8,114 +8,282 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+    #mc_embed_signup{background:transparent; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
+    #mc_embed_signup h2 { display: none; }
+    #mc_embed_signup .indicates-required { display: none; }
+    #mc_embed_signup .mc-field-group { display: none; }
+    #mc_embed_signup #mce-responses { display: none !important; }
+    #mc_embed_signup .response { display: none !important; }
+    #mc_embed_signup .response.error { display: none !important; }
+    #mc_embed_signup .response.success { display: none !important; }
+  </style>
 </head>
 <body>
-    <nav class="nav-toolbar">
+    <nav class="nav-toolbar" role="navigation" aria-label="Main navigation">
         <h2 class="brand-title">Gaialith</h2>
-        <button class="btn contact-us" title="Contact">Contact Us</button>
+        <a href="mailto:contact@gaialith.com" class="btn contact-us" title="Contact" aria-label="Contact us via email">
+            <i class="fas fa-envelope" aria-hidden="true"></i> Contact Us
+        </a>
     </nav>
     
-   
     <div class="main-content">
-        <div>
-            <span class="page-title-1" style="margin-right: -5px">TV</span>
-            <span class="page-title-2" style="margin-left: -5px">PAPERWORK</span>
-        </div>
-        <pre>
-        Short caption to describe TV Paperwork. 
-        
-
-        More information about the product.
-        
-
-        Sign up to our mailing list below to get updates!
-        </pre>
-        <button class="btn2 mailing-list" title="mailing-list">Join Our Mailing List</button>
-    </div>
-
-    <div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-body">
-                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                <h4 class="modal-title" id="newsletterModalLabel" style="text-align: center;">Sign Up For Our Newsletter</h4>
-                <br>
-                <input type="email" class="form-control" id="emailInput" placeholder="Enter your email address" required>
+        <!-- Hero Section -->
+        <section class="hero-section" role="banner" aria-labelledby="main-heading">
+            <div style="text-align: center;">
+                <h1 id="main-heading" style="margin: 0; font-size: 0; line-height: 0;">
+                    <span class="page-title-1" style="margin-right: -10px;">PAPERWORK</span>
+                    <span class="page-title-2" style="margin-right: -10px;">PRO</span>
+                </h1>
+                <p class="tagline">Make paperwork digital. Make TV sustainable.</p>
             </div>
-            <div class="modal-footer">
-              <button class="btn2 sign-up" title="sign-up">Sign Up</button>
-            </div>
-          </div>
-        </div>
-      </div>
+        </section>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-
-    $('.mailing-list').on('click', function() {
-        $('#emailInput').val(''); // Clear the input field
-        $('#newsletterModal').modal('show');
-    });
-
-    // Handle modal hidden event to manage focus
-    $('#newsletterModal').on('hidden.bs.modal', function () {
-        // Return focus to the mailing list button
-        $('.mailing-list').focus();
-    });
-
-    $('.sign-up').on('click', function() {
-        var email = $('#emailInput').val();
-        if (email) {
-            $('#emailInput').val(''); // Clear the input field
-            // Remove focus from button before hiding modal
-            $(this).blur();
-            $('#newsletterModal').modal('hide');
-            setTimeout(() => {
-                showCustomAlert("You're all set! We'll be in touch soon!");
-            }, 500); //Gives time for sign up modal to close and confirmation alert to open
-        } else {
-            showCustomAlert('Please enter a valid email address');
-        }
-    });
-
-    function showCustomAlert(message) {
-        //Custom alert that fits branding
-        var alertHTML = `
-            <div class="custom-alert-overlay">
-                <div class="custom-alert">
-                    <div class="custom-alert-content">
-                        <p>${message}</p>
-                        <button class="btn2 alert-ok">OK</button>
+        <!-- Hero Content Row -->
+        <section class="hero-content-row" role="main" aria-labelledby="content-heading">
+            <div class="hero-text">
+                <div class="content-section">
+                    <h2 id="content-heading" class="sr-only">About Paperwork Pro</h2>
+                    <p>Paperwork Pro is an all-in-one platform to create broadcast television paperwork, custom built for the studio industry. We prioritise efficient, sustainable and accessible software so that you can work creatively and collaboratively with a clear conscience.</p>
+                    
+                    <p>With built-in automation, accessibility features and templated layouts, it's never been easier to create: </p>
+                    
+                    <div style="text-align: center; margin: 20px 0;" role="list" aria-label="Key features">
+                        <span class="highlightText" role="listitem">Scripts</span>
+                        <span class="highlightText" role="listitem">Running Orders</span>
+                        <span class="highlightText" role="listitem">Camera Cards</span>
+                        <span class="highlightText" role="listitem">Floor Plans</span>
                     </div>
                 </div>
             </div>
-        `;
-        
-        //Add to the page
-        $('body').append(alertHTML);
-        
-        //Trigger modal-style animation after a brief delay
-        setTimeout(() => {
-            $('.custom-alert-overlay').addClass('show');
-        }, 10);
-        
-        //OK button
-        $('.alert-ok').on('click', function() {
-            $('.custom-alert-overlay').remove();
-        });
-        
-        //User can click outside the pop up to close it
-        $('.custom-alert-overlay').on('click', function(e) {
-            if (e.target === this) {
-                $('.custom-alert-overlay').remove();
-            }
-        });
-    }
+            
+            <aside class="hero-stats" role="complementary" aria-labelledby="stats-heading">
+                <div class="stats-container">
+                    <div class="stats-icon" aria-hidden="true">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 id="stats-heading" class="stats-title">Did you know?</h3>
+                    <p class="stats-text">~20,000 pieces of paper are wasted per week for a single broadcast television show!</p>
+                </div>
+            </aside>
+        </section>
 
+        <!-- Feature Grid -->
+        <section class="feature-grid" role="region" aria-labelledby="features-heading">
+            <h2 id="features-heading" class="sr-only">Key Features</h2>
+            <article class="feature-item">
+                <div class="feature-icon" aria-hidden="true">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3 class="feature-title">Smart Automation</h3>
+                <p class="feature-description">Automated workflows that save hours of manual work and reduce errors in your production process.</p>
+            </article>
+            
+            <article class="feature-item">
+                <div class="feature-icon" aria-hidden="true">
+                    <i class="fas fa-universal-access"></i>
+                </div>
+                <h3 class="feature-title">Accessibility First</h3>
+                <p class="feature-description">Built with accessibility standards in mind and designed to work seamlessly with assistive technologies.</p>
+            </article>
+            
+            <article class="feature-item">
+                <div class="feature-icon" aria-hidden="true">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="feature-title">Sustainable Design</h3>
+                <p class="feature-description">Reduce paper waste and environmental impact while improving your production efficiency.</p>
+            </article>
+            
+            <article class="feature-item">
+                <div class="feature-icon" aria-hidden="true">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="feature-title">Live Updates</h3>
+                <p class="feature-description">Make live changes to quickly update paperwork, keeping everyone in sync and on schedule.</p>
+            </article>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" role="region" aria-labelledby="cta-heading">
+            <h2 id="cta-heading" class="cta-title">Ready to Transform Your TV Production?</h2>
+            <p class="cta-description">Join the future of sustainable television production. Be among the first to experience the revolution in digital paperwork management.</p>
+            
+            <div style="text-align: center;">
+                <button class="btn2 mailing-list" title="Join our mailing list" aria-label="Join our mailing list to get updates">
+                    <i class="fas fa-rocket" aria-hidden="true"></i> Join Our Mailing List
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Newsletter Modal -->
+    <div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalLabel">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="newsletter-content">
+                    <div class="newsletter-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h4 class="modal-title" id="newsletterModalLabel">Join Our Newsletter</h4>
+                    <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
+                    
+                    <div id="mc_embed_signup" class="newsletter-form">
+                        <form action="https://gaialith.us4.list-manage.com/subscribe/post?u=d5ab533f9e87fc60451be79ff&amp;id=2352a719d8&amp;f_id=008f27e2f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                            <div id="mc_embed_signup_scroll">
+                                <div class="form-group">
+                                    <label for="mce-EMAIL">Email Address</label>
+                                    <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="Enter your email address">
+                                </div>
+                                <div id="mce-responses" class="clear foot" style="display: none;">
+                                    <div class="response" id="mce-error-response" style="display: none;"></div>
+                                    <div class="response" id="mce-success-response" style="display: none;"></div>
+                                </div>
+                                <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                    <input type="text" name="b_d5ab533f9e87fc60451be79ff_2352a719d8" tabindex="-1" value="">
+                                </div>
+                                <div class="submit-container">
+                                    <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="newsletter-submit-btn">
+                                        <i class="fas fa-paper-plane"></i>
+                                        <span>Subscribe to Newsletter</span>
+                                    </button>
+                                </div>
+                                <p class="privacy-note" style="text-align: center;">We respect your privacy. Unsubscribe at any time.</p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    // Enhanced interactive functionality
     $(document).ready(function() {
+        // Add scroll reveal animations
+        function revealOnScroll() {
+            $('.content-section, .feature-grid, .cta-section, .hero-content-row').each(function() {
+                var elementTop = $(this).offset().top;
+                var elementBottom = elementTop + $(this).outerHeight();
+                var viewportTop = $(window).scrollTop();
+                var viewportBottom = viewportTop + $(window).height();
+                
+                if (elementBottom > viewportTop && elementTop < viewportBottom) {
+                    $(this).addClass('revealed');
+                }
+            });
+        }
+        
+        $(window).on('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+        
+        // Scroll to top on page refresh
+        $(window).on('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
 
+        // Newsletter modal functionality
+        $('.mailing-list').on('click', function() {
+            $('#newsletterModal').modal('show');
+        });
+
+        $('#newsletterModal').on('hidden.bs.modal', function () {
+            // Reset the form when modal is closed
+            $('#mc-embedded-subscribe-form')[0].reset();
+            // Clear any Mailchimp response messages
+            $('#mce-error-response, #mce-success-response').hide();
+            $('.mailing-list').focus();
+        });
+        
+        // Mailchimp form submission handling
+        $('#mc-embedded-subscribe-form').on('submit', function(e) {
+            // Let Mailchimp handle the form submission
+            // Show thank you modal after a delay to simulate success
+            setTimeout(function() {
+                $('#newsletterModal').modal('hide');
+                setTimeout(function() {
+                    $('#thankYouModal').modal('show');
+                }, 300);
+            }, 1000);
+        });
+        
+        // Email validation
+        function isValidEmail(email) {
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+        
+        // Enhanced custom alert
+        function showCustomAlert(message) {
+            var alertHTML = `
+                <div class="custom-alert-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; transition: opacity 0.3s ease-in-out;">
+                    <div class="custom-alert">
+                        <div class="custom-alert-content">
+                            <i class="fas fa-check-circle" style="font-size: 48px; color: #4afdcb; margin-bottom: 20px; display: block;"></i>
+                            <p style="font-size: 40px">${message}</p>
+                            <button class="btn2 alert-ok" style="margin: 0; min-width: 80px;">
+                                <i class="fas fa-check"></i> OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('body').append(alertHTML);
+            
+            setTimeout(() => {
+                $('.custom-alert-overlay').css('opacity', '1');
+            }, 10);
+            
+            $('.alert-ok').on('click', function() {
+                $('.custom-alert-overlay').remove();
+            });
+            
+            $('.custom-alert-overlay').on('click', function(e) {
+                if (e.target === this) {
+                    $('.custom-alert-overlay').remove();
+                }
+            });
+        }
     });
+</script>
+
+    <!-- Thank You Modal -->
+    <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="thank-you-content">
+                    <div class="thank-you-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4 class="modal-title" id="thankYouModalLabel">Thank You!</h4>
+                    <p class="thank-you-message">Thank you for subscribing, we'll be in touch soon!</p>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+<script type="text/javascript">
+(function($) {
+    window.fnames = new Array(); 
+    window.ftypes = new Array();
+    fnames[0]='EMAIL';
+    ftypes[0]='email';
+}(jQuery));
+var $mcj = jQuery.noConflict(true);
 </script>
 </body>
 </html>
