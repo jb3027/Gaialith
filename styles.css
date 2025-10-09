@@ -10,8 +10,8 @@
 }
 
 body {
-    background: #fdfdfd;
-    color: #333;
+    background: rgba(74, 253, 203, 0.2);
+    color: #fafafa;
     font-family: 'coolvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     overflow-x: hidden;
@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(253, 253, 253, 0.95);
+    background: rgba(10, 26, 26, 0.95);
     backdrop-filter: blur(20px);
     padding: 20px 40px;
     position: fixed;
@@ -33,20 +33,20 @@ body {
     width: 100%;
     height: 80px;
     z-index: 9999;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(74, 253, 203, 0.1);
     transition: all 0.3s ease;
 }
 
 .nav-toolbar:hover {
-    background: rgba(253, 253, 253, 0.98);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(10, 26, 26, 0.98);
+    border-bottom: 1px solid rgba(74, 253, 203, 0.2);
 }
 
 .brand-title {
     font-size: 28px;
     font-weight: 700;
-    color: #333;
+    color: #fafafa;
     letter-spacing: 2px;
     text-transform: uppercase;
     transition: all 0.3s ease;
@@ -62,7 +62,7 @@ body {
     font-family: 'coolvetica', sans-serif;
     font-size: 16px;
     line-height: 1.8;
-    color: #333;
+    color: #fafafa;
     text-align: left;
     position: relative;
     z-index: 1;
@@ -93,14 +93,12 @@ body {
 .page-title-1 {
     font-size: 80px;
     font-weight: bold;
-    color: #333;
+    color: #fafafa;
     margin: 0;
     letter-spacing: 3px;
     display: inline-block;
     animation: slideInLeft 1s ease-out 0.2s both;
-    background: #e0e0e0;
-    padding: 20px 30px;
-    border-radius: 20px;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .page-title-2 {
@@ -170,7 +168,7 @@ body {
     margin: 30px 0;
     font-size: 18px;
     line-height: 1.8;
-    color: #333;
+    color: #fafafa;
     opacity: 0.9;
     transition: opacity 0.3s ease;
 }
@@ -233,7 +231,7 @@ body {
 
 .stats-text {
     font-size: 18px;
-    color: #333;
+    color: #fafafa;
     line-height: 1.6;
     margin: 0;
     font-weight: 500;
@@ -287,7 +285,7 @@ body {
 
 .feature-description {
     font-size: 16px;
-    color: #333;
+    color: #fafafa;
     opacity: 0.8;
     line-height: 1.6;
 }
@@ -363,7 +361,7 @@ body {
 
 .cta-description {
     font-size: 18px;
-    color: #333;
+    color: #fafafa;
     opacity: 0.9;
     margin-bottom: 40px;
     max-width: 600px;
