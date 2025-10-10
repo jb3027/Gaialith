@@ -123,13 +123,15 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div class="newsletter-form">
-                        <form method="POST" action="https://hooks.zapier.com/hooks/catch/24936259/u5dshlp/">
+                        <form method="POST" action="https://hooks.zapier.com/hooks/catch/24936259/u5dshlp/" target="_blank">
                             <div class="form-group">
                                 <label for="email-input">Email Address</label>
                                 <input type="email" name="email" class="form-control" id="email-input" placeholder="Enter your email address" required>
                             </div>
                             <div class="submit-container">
-                                <input type="submit" value="Subscribe" class="newsletter-submit-btn">
+                                <button type="submit" class="newsletter-submit-btn">
+                                    <i class="fas fa-paper-plane" aria-hidden="false"></i> Subscribe
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -217,78 +219,7 @@
             });
         }
         
-        // Newsletter form submission handling
-        var isSubmitting = false; // Prevent multiple submissions
-        
-        $('form[action*="zapier"]').on('submit', function(e) {
-            e.preventDefault();
-            
-            // Prevent multiple submissions
-            if (isSubmitting) {
-                console.log('Already submitting, ignoring duplicate submission');
-                return;
-            }
-            
-            var form = $(this);
-            var email = form.find('input[name="email"]').val();
-            var submitBtn = form.find('input[type="submit"]');
-            
-            // Validate email
-            if (!isValidEmail(email)) {
-                showCustomAlert('Please enter a valid email address.', true);
-                return;
-            }
-            
-            // Set submitting flag and disable submit button
-            isSubmitting = true;
-            submitBtn.prop('disabled', true).val('Subscribing...');
-            
-            // Submit to Zapier webhook - send as form data (no content-type header to avoid CORS)
-            var formData = {
-                email: email
-            };
-            
-            console.log('Raw email value:', email);
-            console.log('Form data object:', formData);
-            console.log('Zapier webhook URL:', form.attr('action'));
-            
-            // Send as form data without content-type header to avoid CORS issues
-            $.ajax({
-                url: form.attr('action'),
-                method: 'POST',
-                data: formData,
-                // No contentType specified - let jQuery handle it
-                timeout: 10000, // 10 second timeout
-                success: function(response) {
-                    console.log('Zapier response:', response);
-                    
-                    // Close newsletter modal
-                    $('#newsletterModal').modal('hide');
-                    
-                    // Show success message
-                    setTimeout(() => {
-                        showCustomAlert('Successfully subscribed! Thank you for joining our mailing list.');
-                    }, 300);
-                    
-                    // Reset form
-                    form[0].reset();
-                },
-                error: function(xhr, status, error) {
-                    console.error('Subscription error:', error);
-                    
-                    if (status === 'timeout') {
-                        showCustomAlert('Request timed out. Please try again.', true);
-                    } else {
-                        showCustomAlert('Failed to subscribe. Please try again or contact us directly.', true);
-                    }
-                },
-                complete: function() {
-                    // Reset submitting flag and re-enable submit button
-                    isSubmitting = false;
-                    submitBtn.prop('disabled', false).val('Subscribe');
-                }
-            });
-        });
+        // Newsletter form submission - now handled by simple HTML form (no JavaScript needed)
     });
 </script>
 
