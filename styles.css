@@ -10,7 +10,7 @@
 }
 
 body {
-    background: #073229;
+    background: linear-gradient(135deg, #0a1a1a 0%, #073229 25%, #041010 50%, #062323 75%, #0a1a1a 100%);
     color: #fafafa;
     font-family: 'coolvetica', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
