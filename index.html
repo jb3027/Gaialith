@@ -235,12 +235,21 @@
             submitBtn.prop('disabled', true).val('Subscribing...');
             
             // Submit to Zapier webhook
+            var formData = {
+                email: email
+            };
+            
+            console.log('Sending data to Zapier:', formData);
+            
             $.ajax({
                 url: form.attr('action'),
                 method: 'POST',
-                data: form.serialize(),
+                data: formData,
+                contentType: 'application/x-www-form-urlencoded',
                 timeout: 10000, // 10 second timeout
                 success: function(response) {
+                    console.log('Zapier response:', response);
+                    
                     // Close newsletter modal
                     $('#newsletterModal').modal('hide');
                     
