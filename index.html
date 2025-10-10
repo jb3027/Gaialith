@@ -182,12 +182,15 @@
         }
         
         // Enhanced custom alert
-        function showCustomAlert(message) {
+        function showCustomAlert(message, isError = false) {
+            var iconClass = isError ? 'fas fa-exclamation-circle' : 'fas fa-check-circle';
+            var iconColor = isError ? '#ff6b6b' : '#4afdcb';
+            
             var alertHTML = `
                 <div class="custom-alert-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; transition: opacity 0.3s ease-in-out;">
                     <div class="custom-alert">
                         <div class="custom-alert-content">
-                            <i class="fas fa-check-circle" style="font-size: 48px; color: #4afdcb; margin-bottom: 20px; display: block;"></i>
+                            <i class="${iconClass}" style="font-size: 48px; color: ${iconColor}; margin-bottom: 20px; display: block;"></i>
                             <p style="font-size: 40px">${message}</p>
                             <button class="btn2 alert-ok" style="margin: 0; min-width: 80px;">
                                 <i class="fas fa-check"></i> OK
@@ -213,6 +216,57 @@
                 }
             });
         }
+        
+        // Newsletter form submission handling
+        $('form[action*="zapier"]').on('submit', function(e) {
+            e.preventDefault();
+            
+            var form = $(this);
+            var email = form.find('input[name="email"]').val();
+            var submitBtn = form.find('input[type="submit"]');
+            
+            // Validate email
+            if (!isValidEmail(email)) {
+                showCustomAlert('Please enter a valid email address.', true);
+                return;
+            }
+            
+            // Disable submit button and show loading state
+            submitBtn.prop('disabled', true).val('Subscribing...');
+            
+            // Submit to Zapier webhook
+            $.ajax({
+                url: form.attr('action'),
+                method: 'POST',
+                data: form.serialize(),
+                timeout: 10000, // 10 second timeout
+                success: function(response) {
+                    // Close newsletter modal
+                    $('#newsletterModal').modal('hide');
+                    
+                    // Show success message
+                    setTimeout(() => {
+                        showCustomAlert('Successfully subscribed! Thank you for joining our mailing list.');
+                    }, 300);
+                    
+                    // Reset form
+                    form[0].reset();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Subscription error:', error);
+                    
+                    if (status === 'timeout') {
+                        showCustomAlert('Request timed out. Please try again.', true);
+                    } else {
+                        showCustomAlert('Failed to subscribe. Please try again or contact us directly.', true);
+                    }
+                },
+                complete: function() {
+                    // Re-enable submit button
+                    submitBtn.prop('disabled', false).val('Subscribe');
+                }
+            });
+        });
     });
 </script>
 
