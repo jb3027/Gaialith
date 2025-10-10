@@ -218,8 +218,16 @@
         }
         
         // Newsletter form submission handling
+        var isSubmitting = false; // Prevent multiple submissions
+        
         $('form[action*="zapier"]').on('submit', function(e) {
             e.preventDefault();
+            
+            // Prevent multiple submissions
+            if (isSubmitting) {
+                console.log('Already submitting, ignoring duplicate submission');
+                return;
+            }
             
             var form = $(this);
             var email = form.find('input[name="email"]').val();
@@ -231,26 +239,25 @@
                 return;
             }
             
-            // Disable submit button and show loading state
+            // Set submitting flag and disable submit button
+            isSubmitting = true;
             submitBtn.prop('disabled', true).val('Subscribing...');
             
-            // Submit to Zapier webhook - try multiple formats
+            // Submit to Zapier webhook - send as form data (no content-type header to avoid CORS)
             var formData = {
-                email: email,
-                Email: email,
-                EMAIL: email,
-                'email_address': email,
-                'Email Address': email
+                email: email
             };
             
-            console.log('Sending data to Zapier:', formData);
+            console.log('Raw email value:', email);
+            console.log('Form data object:', formData);
+            console.log('Zapier webhook URL:', form.attr('action'));
             
-            // Try JSON format first
+            // Send as form data without content-type header to avoid CORS issues
             $.ajax({
                 url: form.attr('action'),
                 method: 'POST',
-                data: JSON.stringify(formData),
-                contentType: 'application/json',
+                data: formData,
+                // No contentType specified - let jQuery handle it
                 timeout: 10000, // 10 second timeout
                 success: function(response) {
                     console.log('Zapier response:', response);
@@ -267,46 +274,17 @@
                     form[0].reset();
                 },
                 error: function(xhr, status, error) {
-                    console.error('JSON format failed, trying form-encoded:', error);
+                    console.error('Subscription error:', error);
                     
-                    // Fallback to form-encoded format
-                    $.ajax({
-                        url: form.attr('action'),
-                        method: 'POST',
-                        data: formData,
-                        contentType: 'application/x-www-form-urlencoded',
-                        timeout: 10000,
-                        success: function(response) {
-                            console.log('Form-encoded Zapier response:', response);
-                            
-                            // Close newsletter modal
-                            $('#newsletterModal').modal('hide');
-                            
-                            // Show success message
-                            setTimeout(() => {
-                                showCustomAlert('Successfully subscribed! Thank you for joining our mailing list.');
-                            }, 300);
-                            
-                            // Reset form
-                            form[0].reset();
-                        },
-                        error: function(xhr2, status2, error2) {
-                            console.error('Both formats failed:', error2);
-                            
-                            if (status2 === 'timeout') {
-                                showCustomAlert('Request timed out. Please try again.', true);
-                            } else {
-                                showCustomAlert('Failed to subscribe. Please try again or contact us directly.', true);
-                            }
-                        },
-                        complete: function() {
-                            // Re-enable submit button
-                            submitBtn.prop('disabled', false).val('Subscribe');
-                        }
-                    });
+                    if (status === 'timeout') {
+                        showCustomAlert('Request timed out. Please try again.', true);
+                    } else {
+                        showCustomAlert('Failed to subscribe. Please try again or contact us directly.', true);
+                    }
                 },
                 complete: function() {
-                    // Re-enable submit button
+                    // Reset submitting flag and re-enable submit button
+                    isSubmitting = false;
                     submitBtn.prop('disabled', false).val('Subscribe');
                 }
             });
