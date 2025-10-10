@@ -127,6 +127,10 @@
                             <div class="form-group">
                                 <label for="email-input">Email Address</label>
                                 <input type="email" name="email" class="form-control" id="email-input" placeholder="Enter your email address" required>
+                                <!-- Hidden fields with different field names for Zapier -->
+                                <input type="hidden" name="Email" value="">
+                                <input type="hidden" name="email_address" value="">
+                                <input type="hidden" name="subscriber_email" value="">
                             </div>
                             <div class="submit-container">
                                 <button type="submit" class="newsletter-submit-btn">
@@ -219,7 +223,22 @@
             });
         }
         
-        // Newsletter form submission - now handled by simple HTML form (no JavaScript needed)
+        // Newsletter form submission - populate hidden fields for Zapier
+        $('form[action*="zapier"]').on('submit', function(e) {
+            var email = $(this).find('input[name="email"]').val();
+            
+            // Populate all hidden fields with the email value
+            $(this).find('input[name="Email"]').val(email);
+            $(this).find('input[name="email_address"]').val(email);
+            $(this).find('input[name="subscriber_email"]').val(email);
+            
+            console.log('Sending email to Zapier with multiple field names:', {
+                email: email,
+                Email: email,
+                email_address: email,
+                subscriber_email: email
+            });
+        });
     });
 </script>
 
