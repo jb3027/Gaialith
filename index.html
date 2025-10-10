@@ -140,7 +140,7 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div id="mc_embed_signup" class="newsletter-form">
-                        <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
+                        <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" action="https://your-mailchimp-list.us21.list-manage.com/subscribe/post?u=YOUR_USER_ID&amp;id=YOUR_LIST_ID" method="post" novalidate>
                             <div class="form-group">
                                 <label for="mce-EMAIL">Email Address</label>
                                 <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter your email address" required>
@@ -189,43 +189,23 @@
             $('#newsletterModal').modal('show');
         });
 
-        $('#newsletterModal').on('shown.bs.modal', function () {
-            // Remove aria-hidden when modal is shown
-            $(this).attr('aria-hidden', 'false');
-        });
-
         $('#newsletterModal').on('hidden.bs.modal', function () {
-            // Add aria-hidden back when modal is hidden
-            $(this).attr('aria-hidden', 'true');
             // Focus back to the mailing list button when modal is closed
             $('.mailing-list').focus();
-        });
-
-        $('#thankYouModal').on('shown.bs.modal', function () {
-            // Remove aria-hidden when modal is shown
-            $(this).attr('aria-hidden', 'false');
-        });
-
-        $('#thankYouModal').on('hidden.bs.modal', function () {
-            // Add aria-hidden back when modal is hidden
-            $(this).attr('aria-hidden', 'true');
         });
         
         // Handle Mailchimp form submission
         $('#mc-embedded-subscribe-form').on('submit', function(e) {
-            e.preventDefault();
-            
             var email = $('#mce-EMAIL').val();
             
             if (!isValidEmail(email)) {
+                e.preventDefault();
                 showCustomAlert('Please enter a valid email address');
                 return;
             }
             
-            // For now, just show success message
-            // TODO: Replace with actual Mailchimp form action URL
-            console.log('Email collected:', email);
-            
+            // Let the form submit to Mailchimp naturally
+            // Show success message after submission
             setTimeout(function() {
                 $('#newsletterModal').modal('hide');
                 setTimeout(function() {
