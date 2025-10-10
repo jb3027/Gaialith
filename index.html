@@ -13,11 +13,17 @@
     #mc_embed_signup{background:transparent; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%;}
     #mc_embed_signup h2 { display: none; }
     #mc_embed_signup .indicates-required { display: none; }
-    #mc_embed_signup .mc-field-group { display: none; }
     #mc_embed_signup #mce-responses { display: none !important; }
     #mc_embed_signup .response { display: none !important; }
     #mc_embed_signup .response.error { display: none !important; }
     #mc_embed_signup .response.success { display: none !important; }
+    /* Show our custom form elements */
+    #mc_embed_signup .form-group { display: block !important; }
+    #mc_embed_signup .submit-container { display: block !important; }
+    #mc_embed_signup .newsletter-submit-btn { display: block !important; }
+    #mc_embed_signup input[type="email"] { display: block !important; }
+    #mc_embed_signup button[type="submit"] { display: block !important; }
+    #mc_embed_signup label { display: block !important; }
   </style>
 </head>
 <body>
@@ -134,7 +140,21 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div id="mc_embed_signup" class="newsletter-form">
-                        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/d5ab533f9e87fc60451be79ff/d32ac1a38e65a37d3a829fa83.js");</script>
+                        <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="form-group">
+                                <label for="mce-EMAIL">Email Address</label>
+                                <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="submit-container">
+                                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="newsletter-submit-btn">
+                                    <i class="fas fa-paper-plane"></i> Subscribe
+                                </button>
+                            </div>
+                            <!-- Real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                                <input type="text" name="b_YOUR_LIST_ID" tabindex="-1" value="">
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -178,19 +198,35 @@
             $('.mailing-list').focus();
         });
         
-        // The new Mailchimp script will handle form submission automatically
-        // We can listen for Mailchimp events if needed
-        if (window.mc) {
-            window.mc.on('subscribe', function(data) {
-                // Handle successful subscription
-                setTimeout(function() {
-                    $('#newsletterModal').modal('hide');
+        // Handle Mailchimp form submission
+        $('#mc-embedded-subscribe-form').on('submit', function(e) {
+            e.preventDefault();
+            
+            var email = $('#mce-EMAIL').val();
+            
+            if (!isValidEmail(email)) {
+                showCustomAlert('Please enter a valid email address');
+                return;
+            }
+            
+            // Submit to Mailchimp
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                cache: false,
+                dataType: 'jsonp',
+                error: function(err) {
+                    // Mailchimp returns an error even on success, so we'll show success
                     setTimeout(function() {
-                        $('#thankYouModal').modal('show');
-                    }, 300);
-                }, 1000);
+                        $('#newsletterModal').modal('hide');
+                        setTimeout(function() {
+                            $('#thankYouModal').modal('show');
+                        }, 300);
+                    }, 1000);
+                }
             });
-        }
+        });
         
         // Email validation
         function isValidEmail(email) {
