@@ -123,7 +123,7 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div class="newsletter-form">
-                        <form id="custom-subscribe-form" class="validate" novalidate>
+                        <form id="custom-subscribe-form" class="validate" novalidate action="#" method="post">
                             <div class="form-group">
                                 <label for="email-input">Email Address</label>
                                 <input type="email" value="" name="email" class="form-control" id="email-input" placeholder="Enter your email address" required>
@@ -180,9 +180,12 @@
         // Handle custom form submission with Zapier webhook
         $('#custom-subscribe-form').on('submit', function(e) {
             e.preventDefault();
+            console.log('Form submitted - preventing default action');
             
             var email = $('#email-input').val();
             var submitBtn = $('#custom-subscribe-btn');
+            
+            console.log('Email:', email);
             
             if (!isValidEmail(email)) {
                 showCustomAlert('Please enter a valid email address');
@@ -192,6 +195,8 @@
             // Disable submit button and show loading state
             submitBtn.prop('disabled', true);
             submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Subscribing...');
+            
+            console.log('Sending to Zapier webhook...');
             
             // Send subscription request to Zapier webhook
             $.ajax({
@@ -204,6 +209,7 @@
                     source: 'gaialith-website'
                 }),
                 success: function(response) {
+                    console.log('Zapier webhook success:', response);
                     // Zapier webhooks typically return success even for processing
                     $('#newsletterModal').modal('hide');
                     setTimeout(function() {
