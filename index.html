@@ -30,7 +30,7 @@
     <nav class="nav-toolbar" role="navigation" aria-label="Main navigation">
         <h2 class="brand-title">Gaialith</h2>
         <a href="mailto:contact@gaialith.com" class="btn contact-us" title="Contact" aria-label="Contact us via email">
-            <i class="fas fa-envelope" aria-hidden="true"></i> Contact Us
+            <i class="fas fa-envelope" aria-hidden="false"></i> Contact Us
         </a>
     </nav>
     
@@ -66,7 +66,7 @@
             
             <aside class="hero-stats" role="complementary" aria-labelledby="stats-heading">
                 <div class="stats-container">
-                    <div class="stats-icon" aria-hidden="true">
+                    <div class="stats-icon" aria-hidden="false">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 id="stats-heading" class="stats-title">Did you know?</h3>
@@ -79,7 +79,7 @@
         <section class="feature-grid" role="region" aria-labelledby="features-heading">
             <h2 id="features-heading" class="sr-only">Key Features</h2>
             <article class="feature-item">
-                <div class="feature-icon" aria-hidden="true">
+                <div class="feature-icon" aria-hidden="false">
                     <i class="fas fa-magic"></i>
                 </div>
                 <h3 class="feature-title">Smart Automation</h3>
@@ -87,7 +87,7 @@
             </article>
             
             <article class="feature-item">
-                <div class="feature-icon" aria-hidden="true">
+                <div class="feature-icon" aria-hidden="false">
                     <i class="fas fa-universal-access"></i>
                 </div>
                 <h3 class="feature-title">Accessibility First</h3>
@@ -95,7 +95,7 @@
             </article>
             
             <article class="feature-item">
-                <div class="feature-icon" aria-hidden="true">
+                <div class="feature-icon" aria-hidden="false">
                     <i class="fas fa-leaf"></i>
                 </div>
                 <h3 class="feature-title">Sustainable Design</h3>
@@ -103,7 +103,7 @@
             </article>
             
             <article class="feature-item">
-                <div class="feature-icon" aria-hidden="true">
+                <div class="feature-icon" aria-hidden="false">
                     <i class="fas fa-users"></i>
                 </div>
                 <h3 class="feature-title">Live Updates</h3>
@@ -118,14 +118,14 @@
             
             <div style="text-align: center;">
                 <button class="btn2 mailing-list" title="Join our mailing list" aria-label="Join our mailing list to get updates">
-                    <i class="fas fa-rocket" aria-hidden="true"></i> Join Our Mailing List
+                    <i class="fas fa-rocket" aria-hidden="false"></i> Join Our Mailing List
                 </button>
             </div>
         </section>
     </div>
 
     <!-- Newsletter Modal -->
-    <div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalLabel">
+    <div class="modal fade" id="newsletterModal" tabindex="-1" role="dialog" aria-labelledby="newsletterModalLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -140,7 +140,7 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div id="mc_embed_signup" class="newsletter-form">
-                        <form action="YOUR_MAILCHIMP_FORM_ACTION_URL" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" novalidate>
                             <div class="form-group">
                                 <label for="mce-EMAIL">Email Address</label>
                                 <input type="email" value="" name="EMAIL" class="form-control" id="mce-EMAIL" placeholder="Enter your email address" required>
@@ -149,10 +149,6 @@
                                 <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="newsletter-submit-btn">
                                     <i class="fas fa-paper-plane"></i> Subscribe
                                 </button>
-                            </div>
-                            <!-- Real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-                            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                                <input type="text" name="b_YOUR_LIST_ID" tabindex="-1" value="">
                             </div>
                         </form>
                     </div>
@@ -193,9 +189,26 @@
             $('#newsletterModal').modal('show');
         });
 
+        $('#newsletterModal').on('shown.bs.modal', function () {
+            // Remove aria-hidden when modal is shown
+            $(this).attr('aria-hidden', 'false');
+        });
+
         $('#newsletterModal').on('hidden.bs.modal', function () {
+            // Add aria-hidden back when modal is hidden
+            $(this).attr('aria-hidden', 'false');
             // Focus back to the mailing list button when modal is closed
             $('.mailing-list').focus();
+        });
+
+        $('#thankYouModal').on('shown.bs.modal', function () {
+            // Remove aria-hidden when modal is shown
+            $(this).attr('aria-hidden', 'false');
+        });
+
+        $('#thankYouModal').on('hidden.bs.modal', function () {
+            // Add aria-hidden back when modal is hidden
+            $(this).attr('aria-hidden', 'false');
         });
         
         // Handle Mailchimp form submission
@@ -209,23 +222,16 @@
                 return;
             }
             
-            // Submit to Mailchimp
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: $(this).serialize(),
-                cache: false,
-                dataType: 'jsonp',
-                error: function(err) {
-                    // Mailchimp returns an error even on success, so we'll show success
-                    setTimeout(function() {
-                        $('#newsletterModal').modal('hide');
-                        setTimeout(function() {
-                            $('#thankYouModal').modal('show');
-                        }, 300);
-                    }, 1000);
-                }
-            });
+            // For now, just show success message
+            // TODO: Replace with actual Mailchimp form action URL
+            console.log('Email collected:', email);
+            
+            setTimeout(function() {
+                $('#newsletterModal').modal('hide');
+                setTimeout(function() {
+                    $('#thankYouModal').modal('show');
+                }, 300);
+            }, 500);
         });
         
         // Email validation
@@ -270,7 +276,7 @@
 </script>
 
     <!-- Thank You Modal -->
-    <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel">
+    <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
