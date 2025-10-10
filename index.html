@@ -196,7 +196,7 @@
 
         $('#newsletterModal').on('hidden.bs.modal', function () {
             // Add aria-hidden back when modal is hidden
-            $(this).attr('aria-hidden', 'false');
+            $(this).attr('aria-hidden', 'true');
             // Focus back to the mailing list button when modal is closed
             $('.mailing-list').focus();
         });
@@ -208,7 +208,7 @@
 
         $('#thankYouModal').on('hidden.bs.modal', function () {
             // Add aria-hidden back when modal is hidden
-            $(this).attr('aria-hidden', 'false');
+            $(this).attr('aria-hidden', 'true');
         });
         
         // Handle Mailchimp form submission
