@@ -123,15 +123,13 @@
                     <p class="newsletter-description">Stay updated with our latest features and upcoming launch.</p>
                     
                     <div class="newsletter-form">
-                        <form id="newsletter-form" method="POST" action="https://hooks.zapier.com/hooks/catch/24936259/u5dshlp/">
+                        <form method="POST" action="https://hooks.zapier.com/hooks/catch/24936259/u5dshlp/">
                             <div class="form-group">
                                 <label for="email-input">Email Address</label>
                                 <input type="email" name="email" class="form-control" id="email-input" placeholder="Enter your email address" required>
                             </div>
                             <div class="submit-container">
-                                <button type="submit" class="newsletter-submit-btn">
-                                    <i class="fas fa-paper-plane"></i> Subscribe
-                                </button>
+                                <input type="submit" value="Subscribe" class="newsletter-submit-btn">
                             </div>
                         </form>
                     </div>
@@ -175,54 +173,6 @@
         $('#newsletterModal').on('hidden.bs.modal', function () {
             // Focus back to the mailing list button when modal is closed
             $('.mailing-list').focus();
-        });
-        
-        // Handle newsletter form submission to send JSON data to Zapier
-        $('#newsletter-form').on('submit', function(e) {
-            e.preventDefault();
-            
-            var email = $('#email-input').val();
-            var submitBtn = $('.newsletter-submit-btn');
-            
-            if (!isValidEmail(email)) {
-                showCustomAlert('Please enter a valid email address');
-                return;
-            }
-            
-            // Disable submit button and show loading state
-            submitBtn.prop('disabled', true);
-            submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Subscribing...');
-            
-            // Send JSON data to Zapier webhook
-            fetch('https://hooks.zapier.com/hooks/catch/24936259/u5dshlp/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    email: email
-                })
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show success message
-                    $('#newsletterModal').modal('hide');
-                    setTimeout(function() {
-                        $('#thankYouModal').modal('show');
-                    }, 300);
-                } else {
-                    throw new Error('Network response was not ok');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showCustomAlert('Failed to subscribe. Please try again.');
-            })
-            .finally(() => {
-                // Re-enable submit button
-                submitBtn.prop('disabled', false);
-                submitBtn.html('<i class="fas fa-paper-plane"></i> Subscribe');
-            });
         });
         
         // Email validation

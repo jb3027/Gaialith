@@ -571,12 +571,11 @@ body {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
+    display: inline-block;
     box-shadow: 0 6px 20px rgba(74, 253, 203, 0.3);
     min-width: 200px;
-    justify-content: center;
+    text-align: center;
+    font-family: 'coolvetica', sans-serif;
 }
 
 .newsletter-submit-btn:hover {
